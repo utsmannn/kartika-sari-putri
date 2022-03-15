@@ -3,6 +3,7 @@ import com.jakewharton.picnic.BorderStyle
 import com.jakewharton.picnic.TextAlignment
 import com.jakewharton.picnic.renderText
 import com.jakewharton.picnic.table
+import com.luciad.imageio.webp.WebPWriteParam
 import org.imgscalr.Scalr
 import java.awt.image.BufferedImage
 import java.io.File
@@ -19,8 +20,7 @@ class ImageController {
                 val parentPath = file.parent
                 val parentOutput = File(parentPath, output)
                 val bufferSrc = ImageIO.read(file)
-
-                print("\rProcess: ${file.name}")
+                TermUi.echo("\r > Process file: ${file.name}" + " ".repeat(20), trailingNewline = false)
 
                 DpiPercentage.dpis.forEach { pair ->
                     val dpi = pair.first
@@ -63,7 +63,8 @@ class ImageController {
         val param = writer.defaultWriteParam
         param.run {
             compressionMode = ImageWriteParam.MODE_EXPLICIT
-            compressionQuality = 0.7f
+            compressionType = compressionTypes[WebPWriteParam.LOSSY_COMPRESSION]
+            compressionQuality = 0.75f
         }
         writer.write(null, IIOImage(buffer, null, null), param)
 
@@ -169,7 +170,7 @@ class ImageController {
                 val infos = ldpiGroup?.mapIndexed { index, file ->
                     val originalSingle = originalFile.find { it.nameWithoutExtension == file.nameWithoutExtension }
                     val originalSize = originalSingle?.getFileSize()
-                    val name = file.name
+                    val name = file.name.ellipsis(file.extension)
 
                     val ldpiSize = file.getFileSize()
                     val mdpiSize = mdpiGroup?.get(index)?.getFileSize()
@@ -178,18 +179,18 @@ class ImageController {
                     val xxhdpiSize = xxhdpiGroup?.get(index)?.getFileSize()
                     val xxxhdpiSize = xxxhdpiGroup?.get(index)?.getFileSize()
 
-                    val ldpi = ldpiSize.read + " (${file.getDimensionsString()})"
-                    val mdpi = mdpiSize?.read + " (${mdpiGroup?.get(index)?.getDimensionsString()})"
-                    val hdpi = hdpiSize?.read + " (${hdpiGroup?.get(index)?.getDimensionsString()})"
-                    val xhdpi = xhdpiSize?.read + " (${xhdpiGroup?.get(index)?.getDimensionsString()})"
-                    val xxhdpi = xxhdpiSize?.read + " (${xxhdpiGroup?.get(index)?.getDimensionsString()})"
-                    val xxxhdpi = xxxhdpiSize?.read + " (${xxxhdpiGroup?.get(index)?.getDimensionsString()})"
+                    val ldpi = ldpiSize.read + "\n(${file.getDimensionsString()})"
+                    val mdpi = mdpiSize?.read + "\n(${mdpiGroup?.get(index)?.getDimensionsString()})"
+                    val hdpi = hdpiSize?.read + "\n(${hdpiGroup?.get(index)?.getDimensionsString()})"
+                    val xhdpi = xhdpiSize?.read + "\n(${xhdpiGroup?.get(index)?.getDimensionsString()})"
+                    val xxhdpi = xxhdpiSize?.read + "\n(${xxhdpiGroup?.get(index)?.getDimensionsString()})"
+                    val xxxhdpi = xxxhdpiSize?.read + "\n(${xxxhdpiGroup?.get(index)?.getDimensionsString()})"
 
                     val original = originalSize?.count?.toReadable().orEmpty()
                     val diff = originalSize?.min(xxxhdpiSize)
                     val diffRead = diff?.count?.toReadable().orEmpty()
 
-                    ResultInfo(name, ldpi, mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi, original, "-$diffRead")
+                    ResultInfo(name, ldpi, mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi, original, diffRead)
                 }.orEmpty()
 
                 return infos

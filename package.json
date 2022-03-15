@@ -3,11 +3,11 @@
     "kartika": "jdeploy-bundle/jdeploy.js"
   },
   "author": "utsman",
-  "description": "",
+  "description": "CLI android asset drawable generator, support compressed to webp format",
   "main": "index.js",
   "preferGlobal": true,
   "repository": "https://github.com/utsmannn/kartika-sari-putri",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "jdeploy": {
     "jdk": false,
     "javaVersion": "11",
