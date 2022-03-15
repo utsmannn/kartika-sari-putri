@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  <img src="https://images.unsplash.com/photo-1553531540-d99596614a82?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"/>
+  <img src="https://images.unsplash.com/photo-1637039796091-a3c6279fad80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=840&q=80"/>
 </p>
 
 <p align="center">
