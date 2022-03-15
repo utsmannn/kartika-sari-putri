@@ -56,7 +56,7 @@ kartika --webp image-blabla-bla.jpg image-anunu-nu.png
 
 ---
 ```
-Copyright 2021 Muhammad Utsman
+Copyright 2022 Muhammad Utsman
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
