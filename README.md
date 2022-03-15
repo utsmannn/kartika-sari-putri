@@ -24,6 +24,7 @@
 ```
 npm install -g kartika
 ```
+Or download binary in https://www.jdeploy.com/~kartika
 
 ## Usage
 ```
