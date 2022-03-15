@@ -1,0 +1,2 @@
+#/usr/bin
+java -jar /Users/ruangguru/IdeaProjects/kartika/dist/libs/kartika-1.0.0.jar $@
